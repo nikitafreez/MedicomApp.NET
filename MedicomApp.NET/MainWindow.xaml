@@ -1,0 +1,177 @@
+﻿<Window x:Class="MedicomApp.NET.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MedicomApp.NET"
+        mc:Ignorable="d"
+        Title="Главная" Height="450" Width="800"
+        Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        Icon="/imgs/icon.ico">
+    <Grid>
+        <Button x:Name="exitButton" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Выйти" Background="PaleVioletRed" Panel.ZIndex="1" Click="exitButton_Click"/>
+        <StackPanel>
+            <Menu Height="20">
+                <MenuItem Header="Файл">
+                    <Separator/>
+                    <MenuItem Header="Выйти" Name="exitMenuItem" Click="exitMenuItem_Click"/>
+                </MenuItem>
+            </Menu>
+            <TabControl>
+                <TabItem Header="Пользователи" x:Name="UsersTab">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Поиск:"/>
+                            <TextBox x:Name="userSearch" Width="200" TextChanged="userSearch_TextChanged"/>
+                            <Button x:Name="addUserButton" Content="Добавить" Margin="5,0,0,0" Click="addUserButton_Click"/>
+                            <Button x:Name="editUserButton" Content="Изменить" Margin="5,0,0,0" Click="editUserButton_Click"/>
+                            <Button x:Name="deleteUserButton" Content="Удалить" Margin="5,0,0,0" Click="deleteUserButton_Click"/>
+                            <Button x:Name="updateButton" Content="🗘" Margin="5,0,0,0" Click="updateButton_Click"/>
+                            <Button x:Name="excelExportUserButton" Content="Excel" Margin="5,0,0,0" Click="excelExportUserButton_Click"/>
+
+                        </StackPanel>
+                        <DataGrid x:Name="userDataGrid" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Id" Binding="{Binding Path=Id}"/>
+                                <DataGridTextColumn Header="Ник" Binding="{Binding Path=UserName}"/>
+                                <DataGridTextColumn Header="Пароль" Binding="{Binding Path=Password}"/>
+                                <DataGridTextColumn Header="Дата регистрации" Binding="{Binding Path=LastEnter}"/>
+                                <DataGridTextColumn Header="Роль" Binding="{Binding Path=RoleName}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Роли" x:Name="RolesTab">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Поиск:"/>
+                            <TextBox x:Name="roleSearch" Width="200" TextChanged="roleSearch_TextChanged"/>
+                            <Button x:Name="update1Button" Content="🗘" Margin="5,0,0,0" Click="updateButton_Click"/>
+                            <Button x:Name="excelExportRoleButton" Content="Excel" Margin="5,0,0,0" Click="excelExportRoleButton_Click"/>
+                        </StackPanel>
+                        <DataGrid x:Name="roleDataGrid" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Id Пользователя" Binding="{Binding Path=User_Id}"/>
+                                <DataGridTextColumn Header="Роль" Binding="{Binding Path=RoleName}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Заболевания" x:Name="DiseaseTab">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Поиск:"/>
+                            <TextBox x:Name="diseaseSearch" Width="200" TextChanged="diseaseSearch_TextChanged"/>
+                            <Button x:Name="addDiseaseButton" Content="Добавить" Margin="5,0,0,0" Click="addDiseaseButton_Click"/>
+                            <Button x:Name="editDiseaseButton" Content="Изменить" Margin="5,0,0,0" Click="editDiseaseButton_Click"/>
+                            <Button x:Name="deleteDiseaseButton" Content="Удалить" Margin="5,0,0,0" Click="deleteDiseaseButton_Click"/>
+                            <Button x:Name="update2Button" Content="🗘" Margin="5,0,0,0" Click="updateButton_Click"/>
+                            <Button x:Name="excelExportDiseaseButton" Content="Excel" Margin="5,0,0,0" Click="excelExportDiseaseButton_Click"/>
+                        </StackPanel>
+                        <DataGrid x:Name="diseaseDataGrid" AutoGenerateColumns="False" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Id" Binding="{Binding Path=Id}"/>
+                                <DataGridTextColumn Header="Название" Binding="{Binding Path=DiseaseName}"/>
+                                <DataGridTextColumn Header="Описание" Binding="{Binding Path=DiseaseDescription}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Сотрудники" x:Name="WorkerTab">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Поиск:"/>
+                            <TextBox x:Name="workerSearch" Width="200" TextChanged="workerSearch_TextChanged"/>
+                            <Button x:Name="addWorkerButton" Content="Добавить" Margin="5,0,0,0" Click="addWorkerButton_Click"/>
+                            <Button x:Name="editWorkerButton" Content="Изменить" Margin="5,0,0,0" Click="editWorkerButton_Click"/>
+                            <Button x:Name="deleteWorkerButton" Content="Удалить" Margin="5,0,0,0" Click="deleteWorkerButton_Click"/>
+                            <Button x:Name="update3Button" Content="🗘" Margin="5,0,0,0" Click="updateButton_Click"/>
+                            <Button x:Name="excelExportWorkerButton" Content="Excel" Margin="5,0,0,0" Click="excelExportWorkerButton_Click"/>
+                        </StackPanel>
+                        <DataGrid x:Name="workerDataGrid" AutoGenerateColumns="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding Path=Id}"/>
+                            <DataGridTextColumn Header="ФИО" Binding="{Binding Path=FIO}"/>
+                            <DataGridTextColumn Header="ИНН" Binding="{Binding Path=INN}"/>
+                            <DataGridTextColumn Header="Номер паспорта" Binding="{Binding Path=PassNum}"/>
+                            <DataGridTextColumn Header="Серия паспорта" Binding="{Binding Path=PassSeria}"/>
+                            <DataGridTextColumn Header="ДР" Binding="{Binding Path=BirthDate}"/>
+                            <DataGridTextColumn Header="Должность" Binding="{Binding Path=Position}"/>
+                            <DataGridTextColumn Header="Эл. почта" Binding="{Binding Path=Email}"/>
+                            <DataGridTextColumn Header="Номер телефона" Binding="{Binding Path=PhoneNumber}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Должности" x:Name="PositionTab">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Поиск:"/>
+                            <TextBox x:Name="positionSearch" Width="200" TextChanged="positionSearch_TextChanged"/>
+                            <Button x:Name="addPositionButton" Content="Добавить" Margin="5,0,0,0" Click="addPositionButton_Click"/>
+                            <Button x:Name="editPositionButton" Content="Изменить" Margin="5,0,0,0" Click="editPositionButton_Click"/>
+                            <Button x:Name="deletePositionButton" Content="Удалить" Margin="5,0,0,0" Click="deletePositionButton_Click"/>
+                            <Button x:Name="update4Button" Content="🗘" Margin="5,0,0,0" Click="updateButton_Click"/>
+                            <Button x:Name="excelExportPositionButton" Content="Excel" Margin="5,0,0,0" Click="excelExportPositionButton_Click"/>
+                        </StackPanel>
+                        <DataGrid x:Name="positionDataGrid" AutoGenerateColumns="False" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Id" Binding="{Binding Path=Id}"/>
+                                <DataGridTextColumn Header="Название" Binding="{Binding Path=PositionName}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Пациенты" x:Name="PatientTab">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Поиск:"/>
+                            <TextBox x:Name="patientSearch" Width="200" TextChanged="patientSearch_TextChanged"/>
+                            <Button x:Name="addPatientButton" Content="Добавить" Margin="5,0,0,0" Click="addPatientButton_Click"/>
+                            <Button x:Name="editPatientButton" Content="Изменить" Margin="5,0,0,0" Click="editPatientButton_Click"/>
+                            <Button x:Name="deletePatientButton" Content="Удалить" Margin="5,0,0,0" Click="deletePatientButton_Click"/>
+                            <Button x:Name="update5Button" Content="🗘" Margin="5,0,0,0" Click="updateButton_Click"/>
+                            <Button x:Name="excelExportPatientButton" Content="Excel" Margin="5,0,0,0" Click="excelExportPatientButton_Click"/>
+                        </StackPanel>
+                        <DataGrid x:Name="patientDataGrid" AutoGenerateColumns="False" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Id" Binding="{Binding Path=Id}"/>
+                                <DataGridTextColumn Header="ФИО" Binding="{Binding Path=FIO}"/>
+                                <DataGridTextColumn Header="ОМС" Binding="{Binding Path=OMS}"/>
+                                <DataGridTextColumn Header="Номер паспорта" Binding="{Binding Path=PassNum}"/>
+                                <DataGridTextColumn Header="Серия паспорта" Binding="{Binding Path=PassSeria}"/>
+                                <DataGridTextColumn Header="ДР" Binding="{Binding Path=BirthDate}"/>
+                                <DataGridTextColumn Header="Эл. почта" Binding="{Binding Path=Email}"/>
+                                <DataGridTextColumn Header="Номер телефона" Binding="{Binding Path=PhoneNumber}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Лечения" x:Name="TreatmentTab">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Поиск:"/>
+                            <TextBox x:Name="treatmentSearch" Width="200" TextChanged="treatmentSearch_TextChanged"/>
+                            <Button x:Name="addTreatmentButton" Content="Добавить" Margin="5,0,0,0" Click="addTreatmentButton_Click"/>
+                            <Button x:Name="editTreatmentButton" Content="Изменить" Margin="5,0,0,0" Click="editTreatmentButton_Click"/>
+                            <Button x:Name="deleteTreatmentButton" Content="Удалить" Margin="5,0,0,0" Click="deleteTreatmentButton_Click"/>
+                            <Button x:Name="update6Button" Content="🗘" Margin="5,0,0,0" Click="updateButton_Click"/>
+                            <Button x:Name="excelExportTreatmentButton" Content="Excel" Margin="5,0,0,0" Click="excelExportTreatmentButton_Click"/>
+                            <Button x:Name="statOpenButton" Content="Статистика" Margin="5,0,0,0" Click="statOpenButton_Click"/>
+                        </StackPanel>
+                        <DataGrid x:Name="treatmentDataGrid" AutoGenerateColumns="False" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Id" Binding="{Binding Path=Id}"/>
+                                <DataGridTextColumn Header="Дата лечения" Binding="{Binding Path=TreatmentDate}"/>
+                                <DataGridTextColumn Header="Сумма лечения" Binding="{Binding Path=TreatmentSum}"/>
+                                <DataGridTextColumn Header="Болезнь" Binding="{Binding Path=DiseaseName}"/>
+                                <DataGridTextColumn Header="Пациент" Binding="{Binding Path=Patient}"/>
+                                <DataGridTextColumn Header="Лечащий врач" Binding="{Binding Path=Worker}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+        </StackPanel>
+    </Grid>
+</Window>

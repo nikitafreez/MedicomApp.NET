@@ -1,0 +1,32 @@
+﻿<Window x:Class="MedicomApp.NET.UserAddEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MedicomApp.NET"
+        mc:Ignorable="d"
+        Title="Пользователь" Height="250" Width="400"
+        Loaded="Window_Loaded" Icon="/imgs/icon.ico">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel>
+                    <Label Content="Логин:" Height="30"/>
+                    <Label Content="Пароль:" Height="30" Margin="0,15,0,0"/>
+                    <Label Content="Роль:" Height="30" Margin="0,15" x:Name="comboLabel"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBox x:Name="loginTextBox" Width="200" Height="30"/>
+                    <TextBox x:Name="passwordTextBox" Width="200" Height="30" Margin="0,15,0,0"/>
+                    <ComboBox x:Name="roleComboBox" Width="200" Height="30" Margin="0,15">
+                        <ComboBoxItem Content="ADMIN" x:Name="adminItem"/>
+                        <ComboBoxItem Content="DOCTOR" x:Name="doctorItem"/>
+                        <ComboBoxItem Content="KADR" x:Name="kadrItem"/>
+                    </ComboBox>
+                </StackPanel>
+            </StackPanel>
+            <Button x:Name="addEditUserButton" Content="Добавить" Click="addEditUserButton_Click" Margin="0,10,0,0"/>
+            <Button x:Name="exitButton" Content="Назад" Margin="0,10,0,0" Click="exitButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
